@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>D Platform Chat</title>
+  <script>
+    async function sendMessage() {
+      const question = document.getElementById("question").value;
+      const response = await fetch("http://localhost:5000/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({question})
+      });
+      const data = await response.json();
+      document.getElementById("response").innerText = data.response;
+    }
+  </script>
+</head>
+<body>
+  <h1>D Platform – Employer Chat with AI Agent</h1>
+  <input type="text" id="question" placeholder="Ask something..." size="50"/>
+  <button onclick="sendMessage()">Send</button>
+  <p><strong>Response:</strong> <span id="response"></span></p>
+</body>
+</html>
